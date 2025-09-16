@@ -1,0 +1,19 @@
+# Виртуальное окружение
+venv/
+.venv/
+env/
+*.pyc
+__pycache__/
+
+# Базы данных и настройки
+*.sqlite3
+*.db
+.env
+.env.local
+secrets.json
+
+# Логи и кэш
+*.log
+.cache/
+.idea/
+.vscode/

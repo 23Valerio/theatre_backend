@@ -18,4 +18,6 @@ secrets.json
 .idea/
 .vscode/
 
-/media/
+/gallery_images/
+/show_images/
+/slider_images/

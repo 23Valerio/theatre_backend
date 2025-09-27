@@ -37,3 +37,4 @@ class SliderImage(models.Model):
 
 class GalleryImage(models.Model):
     image = models.ImageField(upload_to='gallery_images/', blank=True)
+

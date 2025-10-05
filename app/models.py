@@ -27,7 +27,7 @@ class Ticket(models.Model):
     buyer_name = models.CharField(max_length=100, blank=True, null=True)
     buyer_email = models.EmailField(blank=True, null=True)
     buyer_phone = models.CharField(max_length=15, blank=True, null=True)
-    bought_at = models.DateTimeField(blank=True, null=True)
+    created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return f"{self.show.name} {self.show.date.strftime('%Y-%m-%d')} buyer {self.buyer_name}" 

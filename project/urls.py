@@ -3,7 +3,6 @@ from django.urls import path
 from django.conf.urls.static import static
 from app.views import ShowListCreateView, GalleryListCreateView, ShowUpdateView, SliderListCreateView, GalleryListUpdateView, SliderListUpdateView, UserDetailView, ByTicketView, FutureShows, RegisterView, LoginView, TicketsView
 from django.conf import settings
-from rest_framework.authtoken.views import obtain_auth_token
 
 urlpatterns = [
     path('admin/', admin.site.urls),

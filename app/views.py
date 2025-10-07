@@ -5,7 +5,7 @@ from rest_framework.permissions import IsAdminUser, AllowAny, IsAuthenticated
 from rest_framework.views import APIView
 from rest_framework.authtoken.models import Token
 from app.models import Show, GalleryImage, SliderImage, Ticket
-from api.serializers import ShowSerializer, GalleryImageSerializer, SliderImageSerializer, UserSerializer, TicketCreateSerializer, RegisterSerializer, LoginSerializer, TicketSerializer, ShowTicketsSerializer
+from api.serializers import ShowSerializer, GalleryImageSerializer, SliderImageSerializer, UserSerializer, TicketCreateSerializer, RegisterSerializer, LoginSerializer, ShowTicketsSerializer
 from django.contrib.auth.models import User
 from rest_framework import status
 
@@ -62,7 +62,6 @@ class UserDetailView(generics.RetrieveAPIView):
         return self.request.user
 
 
-# !!!!!!! 
 class TicketsView(generics.ListAPIView):
     queryset = Show.objects.all().order_by('-date')
     serializer_class = ShowTicketsSerializer

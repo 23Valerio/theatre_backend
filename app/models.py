@@ -24,9 +24,9 @@ class Show(models.Model):
 class Ticket(models.Model):
     show = models.ForeignKey(Show, related_name='show_tickets', on_delete=models.CASCADE)
     user = models.ForeignKey(User, related_name='show_tickets', on_delete=models.CASCADE, null=True, blank=True)
-    buyer_name = models.CharField(max_length=100, blank=True, null=True)
-    buyer_email = models.EmailField(blank=True, null=True)
-    buyer_phone = models.CharField(max_length=15, blank=True, null=True)
+    buyer_name = models.CharField(max_length=100, default="Ivan")
+    buyer_email = models.EmailField(blank=True, default="unknown@example.com")
+    buyer_phone = models.CharField(max_length=15, null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
@@ -34,6 +34,7 @@ class Ticket(models.Model):
 
 class SliderImage(models.Model):
     image = models.ImageField(upload_to='slider_images/', blank=True)
+
 
 class GalleryImage(models.Model):
     image = models.ImageField(upload_to='gallery_images/', blank=True)

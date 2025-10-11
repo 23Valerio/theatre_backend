@@ -7,6 +7,8 @@ from rest_framework.authtoken.models import Token
 from app.models import Show, GalleryImage, SliderImage
 from django.contrib.auth.models import User
 from rest_framework import status
+from django.core.mail import send_mail
+from django.conf import settings
 from api.serializers import ( 
     ShowSerializer, 
     GalleryImageSerializer, 
@@ -134,3 +136,30 @@ class LoginView(APIView):
             token, created = Token.objects.get_or_create(user=user)
             return Response({"token": token.key, "user": user.username, "email": user.email})
         return Response(serializer.errors, status = status.HTTP_401_UNAUTHORIZED) 
+
+
+class SendEmailView(APIView):
+    """Send an email from visitors."""
+
+    def post(self, request):
+        """Handle sending an email."""
+        
+        name = request.data.get('name')
+        message = request.data.get('message')
+        email = request.data.get('email')
+
+        #email content
+        subject = f"Сообщение от {name}"
+        body = f"От: {name}\nEmail: {email}\n Сообщение: {message}"
+
+        try:
+            send_mail(
+                subject,
+                body,
+                settings.DEFAULT_FROM_EMAIL,  # от кого
+                ["valeriikuiovda@gmail.com"],     # куда
+                fail_silently=False,
+            )
+            return Response({"message": "Письмо успешно отправлено!"})
+        except Exception as e:
+            return Response({"message": f"Ошибка: {e}"}, status=500)

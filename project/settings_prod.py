@@ -9,6 +9,7 @@ DEBUG = False
 
 ALLOWED_HOSTS = ['51.20.9.159']
 
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
 
 DATABASES = {
     'default': {

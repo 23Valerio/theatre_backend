@@ -34,6 +34,10 @@ class SliderImageSerializer(serializers.ModelSerializer):
 
 class TicketSerializer(serializers.ModelSerializer):
     """Serializer for the Ticket model."""
+
+    show_name = serializers.CharField(source='show.name', read_only=True)
+    show_date = serializers.DateTimeField(source='show.date', read_only=True)
+    
     class Meta:
         model = Ticket
         fields = ['id', 'show', 'user', 'buyer_name', 'buyer_email', 'buyer_phone', 'created_at']

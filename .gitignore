@@ -4,6 +4,7 @@ venv/
 env/
 *.pyc
 __pycache__/
+/static/*
 
 # Базы данных и настройки
 *.sqlite3

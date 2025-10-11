@@ -32,5 +32,5 @@ urlpatterns = [
     path('api/slider/<int:pk>/', SliderListUpdateView.as_view(), name='slider-list-update'),
     path('api/buyticket/', ByTicketView.as_view(), name='buy-ticket'),
     path('api/tickets/', TicketsView.as_view(), name='tickets'),
-    path("api/sendemail/", SendEmailView.as_view(), name="send_email"),
+    path("api/sendmail/", SendEmailView.as_view(), name="send_email"),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

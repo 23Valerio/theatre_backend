@@ -34,12 +34,6 @@ class ShowListCreateView(generics.ListCreateAPIView):
             return [IsAdminUser()]
         return [AllowAny()]
 
-# class ShowDetailView(generics.RetrieveUpdateDestroyAPIView):
-#     """Retrieve, update, or delete a show (admin only)."""
-
-#     queryset = Show.objects.all()
-#     serializer_class = ShowSerializer
-#     permission_classes = [IsAdminUser]
 
 class ShowUpdateView(generics.RetrieveUpdateDestroyAPIView):
     """Retrieve, update, or delete a show (admin only)."""
@@ -117,6 +111,40 @@ class ByTicketView(generics.CreateAPIView):
         context = super().get_serializer_context()
         context['request'] = self.request
         return context
+    
+    def perform_create(self, serializer):
+        """Save ticket and send email after successful creation."""
+
+        ticket = serializer.save() 
+
+        buyer_name = ticket.buyer_name
+        buyer_email = ticket.buyer_email
+        buyer_phone = ticket.buyer_phone
+        show = ticket.show 
+
+        # Email content
+        subject = f"Подтверждаем резервацию билета — {show.name}"
+        message = (
+            f"Здраствуйте, {buyer_name}!\n\n"
+            f"Вы успешно зарезервировали билет на спектакль:\n\n"
+            f"Название спектакля: {show.name}\n"
+            f"Дата: {show.date.strftime('%d.%m.%Y %H:%M')}\n"
+            f"Место: {show.place}\n\n"
+            f"Ваш email: {buyer_email}\n"
+            f"Телефон: {buyer_phone}\n\n"
+            f"Спасибо, что выбрали наш театр Треск!\n"
+        )
+
+        try:
+            send_mail(
+                subject,
+                message,
+                settings.DEFAULT_FROM_EMAIL,
+                [buyer_email],  # send to buyer's email
+                fail_silently=False,
+            )
+        except Exception as e:
+            print("Error mail send:", e)
 
 class RegisterView(generics.CreateAPIView):
     """Register a new user."""

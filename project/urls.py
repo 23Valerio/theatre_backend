@@ -1,8 +1,21 @@
 from django.contrib import admin
 from django.urls import path
 from django.conf.urls.static import static
-from app.views import ShowListCreateView, GalleryListCreateView, ShowUpdateView, SliderListCreateView, GalleryListUpdateView, SliderListUpdateView, UserDetailView, ByTicketView, FutureShows, RegisterView, LoginView, TicketsView
 from django.conf import settings
+from app.views import ( 
+    ShowListCreateView, 
+    GalleryListCreateView, 
+    ShowUpdateView, 
+    SliderListCreateView, 
+    GalleryListUpdateView, 
+    SliderListUpdateView, 
+    UserDetailView, 
+    ByTicketView, 
+    FutureShows, 
+    RegisterView, 
+    LoginView, 
+    TicketsView
+)
 
 urlpatterns = [
     path('admin/', admin.site.urls),

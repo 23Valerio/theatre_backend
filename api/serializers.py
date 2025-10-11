@@ -87,7 +87,7 @@ class UserSerializer(serializers.ModelSerializer):
         """Retrieve all tickets purchased by the user."""
 
         from app.models import Ticket
-        tickets = Ticket.objects.filter(user=obj).order_by('-bought_at') 
+        tickets = Ticket.objects.filter(user=obj).order_by('-created_at') 
         return TicketSerializer(tickets, many=True).data
 
 class RegisterSerializer(serializers.ModelSerializer):

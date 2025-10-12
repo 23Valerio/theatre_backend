@@ -26,4 +26,5 @@ secrets.json
 /media/gallery_images/
 /gallery_images/
 /show_images/
-/slider_images/
+/slider_images//media/
+/media/

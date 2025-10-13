@@ -9,6 +9,8 @@ from django.contrib.auth.models import User
 from rest_framework import status
 from django.core.mail import send_mail
 from django.conf import settings
+from django.views.decorators.csrf import csrf_exempt
+from django.utils.decorators import method_decorator
 from api.serializers import ( 
     ShowSerializer, 
     GalleryImageSerializer, 
@@ -151,10 +153,12 @@ class RegisterView(generics.CreateAPIView):
 
     queryset = User.objects.all()
     serializer_class = RegisterSerializer
-   
+
+@method_decorator(csrf_exempt, name='dispatch')   
 class LoginView(APIView):
     """Authenticate user and return token."""
 
+    permission_classes = [AllowAny]
     def post(self, request):
         """Handle user login."""
         

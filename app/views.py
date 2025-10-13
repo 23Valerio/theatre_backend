@@ -148,9 +148,11 @@ class ByTicketView(generics.CreateAPIView):
         except Exception as e:
             print("Error mail send:", e)
 
+@method_decorator(csrf_exempt, name='dispatch')
 class RegisterView(generics.CreateAPIView):
     """Register a new user."""
-
+    
+    permission_classes = [AllowAny]
     queryset = User.objects.all()
     serializer_class = RegisterSerializer
 
